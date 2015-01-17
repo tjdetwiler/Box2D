@@ -171,7 +171,7 @@ public:
 		e_multiple
 	};
 
-	RayCast()
+	RayCast(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -306,20 +306,20 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_1:
-		case GLFW_KEY_2:
-		case GLFW_KEY_3:
-		case GLFW_KEY_4:
-		case GLFW_KEY_5:
-		case GLFW_KEY_6:
-			Create(key - GLFW_KEY_1);
+		case 27:  // Num1
+		case 28:
+		case 29:
+		case 30:
+		case 31:  // Num5
+		case 32:
+			Create(key - 27);
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			DestroyBody();
 			break;
 
-		case GLFW_KEY_M:
+		case 12:  // M
 			if (m_mode == e_closest)
 			{
 				m_mode = e_any;
@@ -461,9 +461,9 @@ public:
 #endif
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new RayCast;
+		return new RayCast(window);
 	}
 
 	int32 m_bodyIndex;

@@ -23,7 +23,7 @@
 class BasicSliderCrank : public Test
 {
 public:
-	BasicSliderCrank()
+	BasicSliderCrank(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -94,9 +94,9 @@ public:
   		}
 	}
     
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new BasicSliderCrank;
+		return new BasicSliderCrank(window);
 	}
 };
 

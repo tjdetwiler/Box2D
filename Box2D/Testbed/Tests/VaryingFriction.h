@@ -23,7 +23,7 @@ class VaryingFriction : public Test
 {
 public:
 
-	VaryingFriction()
+	VaryingFriction(sf::RenderWindow& window) : Test (window)
 	{
 		{
 			b2BodyDef bd;
@@ -115,9 +115,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new VaryingFriction;
+		return new VaryingFriction(window);
 	}
 };
 

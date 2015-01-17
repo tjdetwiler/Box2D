@@ -23,7 +23,7 @@ class HeavyOnLightTwo : public Test
 {
 public:
     
-	HeavyOnLightTwo()
+	HeavyOnLightTwo(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -74,15 +74,15 @@ public:
 	{
 		switch (key)
 		{
-        case GLFW_KEY_H:
+        case 7:  //sf::Keyboard::H
             ToggleHeavy();
             break;
 		}
 	}
     
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new HeavyOnLightTwo;
+		return new HeavyOnLightTwo(window);
 	}
     
 	b2Body* m_heavy;

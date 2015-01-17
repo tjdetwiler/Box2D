@@ -28,7 +28,7 @@ public:
 		e_actorCount = 128
 	};
 
-	DynamicTreeTest()
+	DynamicTreeTest(sf::RenderWindow& window) : Test(window)
 	{
 		m_worldExtent = 15.0f;
 		m_proxyExtent = 0.5f;
@@ -57,9 +57,9 @@ public:
 		m_automated = false;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new DynamicTreeTest;
+		return new DynamicTreeTest(window);
 	}
 
 	void Step(Settings* settings)
@@ -139,19 +139,19 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  //sf::Keyboard::A
 			m_automated = !m_automated;
 			break;
 
-		case GLFW_KEY_C:
+		case 2:  // C
 			CreateProxy();
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			DestroyProxy();
 			break;
 
-		case GLFW_KEY_M:
+		case 12: // M
 			MoveProxy();
 			break;
 		}

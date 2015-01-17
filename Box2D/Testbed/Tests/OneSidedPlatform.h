@@ -30,7 +30,7 @@ public:
 		e_below
 	};
 
-	OneSidedPlatform()
+	OneSidedPlatform(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground
 		{
@@ -118,9 +118,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new OneSidedPlatform;
+		return new OneSidedPlatform(window);
 	}
 
 	float32 m_radius, m_top, m_bottom;

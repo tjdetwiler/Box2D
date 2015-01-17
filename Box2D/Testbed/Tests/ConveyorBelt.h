@@ -23,7 +23,7 @@ class ConveyorBelt : public Test
 {
 public:
 
-	ConveyorBelt()
+	ConveyorBelt(sf::RenderWindow& window) : Test (window)
 	{
 		// Ground
 		{
@@ -87,9 +87,9 @@ public:
 		Test::Step(settings);
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new ConveyorBelt;
+		return new ConveyorBelt(window);
 	}
 
 	b2Fixture* m_platform;

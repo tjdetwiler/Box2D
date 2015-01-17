@@ -22,7 +22,7 @@
 class Gears : public Test
 {
 public:
-	Gears()
+	Gears(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -162,9 +162,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Gears;
+		return new Gears(window);
 	}
 
 	b2RevoluteJoint* m_joint1;

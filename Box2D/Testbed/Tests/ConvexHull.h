@@ -27,7 +27,7 @@ public:
 		e_count = b2_maxPolygonVertices
 	};
 
-	ConvexHull()
+	ConvexHull(sf::RenderWindow& window) : Test(window)
 	{
 		Generate();
 		m_auto = false;
@@ -53,20 +53,20 @@ public:
 		m_count = e_count;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new ConvexHull;
+		return new ConvexHull(window);
 	}
 
 	void Keyboard(int key)
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  // sf::Keyboard::A
 			m_auto = !m_auto;
 			break;
 
-		case GLFW_KEY_G:
+		case 6:  // sf::Keyboard::G
 			Generate();
 			break;
 		}
@@ -87,7 +87,8 @@ public:
 		for (int32 i = 0; i < m_count; ++i)
 		{
 			g_debugDraw.DrawPoint(m_points[i], 3.0f, b2Color(0.3f, 0.9f, 0.3f));
-			g_debugDraw.DrawString(m_points[i] + b2Vec2(0.05f, 0.05f), "%d", i);
+            const b2Vec2 pos = m_points[i] + b2Vec2(0.05f, 0.05f);
+			g_debugDraw.DrawString(pos.x, pos.y, "%d", i);
 		}
 
 		if (shape.Validate() == false)

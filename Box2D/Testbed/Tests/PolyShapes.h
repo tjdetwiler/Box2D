@@ -116,7 +116,7 @@ public:
 		e_maxBodies = 256
 	};
 
-	PolyShapes()
+	PolyShapes(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -234,15 +234,15 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_1:
-		case GLFW_KEY_2:
-		case GLFW_KEY_3:
-		case GLFW_KEY_4:
-		case GLFW_KEY_5:
-			Create(key - GLFW_KEY_1);
+		case 27:  // Num1
+		case 28:
+		case 29:
+		case 30:
+		case 31:
+			Create(key - 27);
 			break;
 
-		case GLFW_KEY_A:
+		case 0:  // A
 			for (int32 i = 0; i < e_maxBodies; i += 2)
 			{
 				if (m_bodies[i])
@@ -253,7 +253,7 @@ public:
 			}
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			DestroyBody();
 			break;
 		}
@@ -285,9 +285,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new PolyShapes;
+		return new PolyShapes(window);
 	}
 
 	int32 m_bodyIndex;

@@ -23,7 +23,7 @@ class AddPair : public Test
 {
 public:
 
-	AddPair()
+	AddPair(sf::RenderWindow& window) : Test(window)
 	{
 		m_world->SetGravity(b2Vec2(0.0f,0.0f));
 		{
@@ -59,9 +59,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new AddPair;
+		return new AddPair(window);
 	}
 };
 

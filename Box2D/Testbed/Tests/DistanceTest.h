@@ -22,7 +22,7 @@
 class DistanceTest : public Test
 {
 public:
-	DistanceTest()
+	DistanceTest(sf::RenderWindow& window) : Test (window)
 	{
 		{
 			m_transformA.SetIdentity();
@@ -39,9 +39,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new DistanceTest;
+		return new DistanceTest(window);
 	}
 
 	void Step(Settings* settings)
@@ -95,27 +95,27 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  //sf::Keyboard::A
 			m_positionB.x -= 0.1f;
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			m_positionB.x += 0.1f;
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // S
 			m_positionB.y -= 0.1f;
 			break;
 
-		case GLFW_KEY_W:
+		case 22:  // W
 			m_positionB.y += 0.1f;
 			break;
 
-		case GLFW_KEY_Q:
+		case 16:  // Q
 			m_angleB += 0.1f * b2_pi;
 			break;
 
-		case GLFW_KEY_E:
+		case 4: // E
 			m_angleB -= 0.1f * b2_pi;
 			break;
 		}

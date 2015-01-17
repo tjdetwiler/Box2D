@@ -28,7 +28,7 @@ public:
 		e_depth = 4
 	};
 
-	Mobile()
+	Mobile(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground;
 
@@ -93,9 +93,9 @@ public:
 		return body;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Mobile;
+		return new Mobile(window);
 	}
 };
 

@@ -20,75 +20,37 @@
 #define DEBUGDRAW_H
 
 #include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
 
-struct b2AABB;
-struct GLRenderPoints;
-struct GLRenderLines;
-struct GLRenderTriangles;
-
-//
-struct Camera
-{
-	Camera()
-	{
-		m_center.Set(0.0f, 20.0f);
-		m_extent = 25.0f;
-		m_zoom = 1.0f;
-		m_width = 1280;
-		m_height = 800;
-	}
-
-	b2Vec2 ConvertScreenToWorld(const b2Vec2& screenPoint);
-	b2Vec2 ConvertWorldToScreen(const b2Vec2& worldPoint);
-	void BuildProjectionMatrix(float32* m, float32 zBias);
-
-	b2Vec2 m_center;
-	float32 m_extent;
-	float32 m_zoom;
-	int32 m_width;
-	int32 m_height;
-};
 
 // This class implements debug drawing callbacks that are invoked
 // inside b2World::Step.
-class DebugDraw : public b2Draw
-{
-public:
-	DebugDraw();
-	~DebugDraw();
 
-	void Create();
-	void Destroy();
+class DebugDraw : public b2Draw {
+ public:
+    DebugDraw(sf::RenderWindow &window);
+    virtual ~DebugDraw();
 
-	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 
-	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
+    virtual void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
+    virtual void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
+    virtual void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
+    virtual void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color);
+    virtual void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
+    virtual void DrawTransform(const b2Transform& xf);
 
-	void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
+    void DrawPoint(const b2Vec2& center, const float32& radius, const b2Color& color);
+    static sf::Color B2toSFColor(const b2Color &color, int alpha);
 
-	void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color);
-
-	void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
-
-	void DrawTransform(const b2Transform& xf);
-
-    void DrawPoint(const b2Vec2& p, float32 size, const b2Color& color);
-
-    void DrawString(int x, int y, const char* string, ...); 
-
-    void DrawString(const b2Vec2& p, const char* string, ...);
-
+    void DrawString(int x, int y, const char* format, ...);
     void DrawAABB(b2AABB* aabb, const b2Color& color);
+    void DrawMouseJoint(b2Vec2& p1, b2Vec2& p2, const b2Color &boxColor, const b2Color &lineColor);
 
-    void Flush();
-    
-private:
-	GLRenderPoints* m_points;
-    GLRenderLines* m_lines;
-    GLRenderTriangles* m_triangles;
+
+ private:
+    const float SCALEY = -30.0f; // set to negative since demo was written for open gl coordinate system
+    const float SCALEX = 30.0f;
+    sf::RenderWindow* mWindow;
+    std::unique_ptr<sf::Font> mFont;
 };
-
-extern DebugDraw g_debugDraw;
-extern Camera g_camera;
-
 #endif

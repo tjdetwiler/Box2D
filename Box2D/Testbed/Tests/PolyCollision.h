@@ -22,7 +22,7 @@
 class PolyCollision : public Test
 {
 public:
-	PolyCollision()
+	PolyCollision(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			m_polygonA.SetAsBox(0.2f, 0.4f);
@@ -37,9 +37,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new PolyCollision;
+		return new PolyCollision(window);
 	}
 
 	void Step(Settings* settings)
@@ -81,27 +81,27 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  // A
 			m_positionB.x -= 0.1f;
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			m_positionB.x += 0.1f;
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // S
 			m_positionB.y -= 0.1f;
 			break;
 
-		case GLFW_KEY_W:
+		case 22:  // W
 			m_positionB.y += 0.1f;
 			break;
 
-		case GLFW_KEY_Q:
+		case 16:  // Q
 			m_angleB += 0.1f * b2_pi;
 			break;
 
-		case GLFW_KEY_E:
+		case 4:  // E
 			m_angleB -= 0.1f * b2_pi;
 			break;
 		}

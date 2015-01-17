@@ -19,10 +19,12 @@
 #ifndef APPLY_FORCE_H
 #define APPLY_FORCE_H
 
+
+
 class ApplyForce : public Test
 {
 public:
-	ApplyForce()
+	ApplyForce(sf::RenderWindow& window) : Test(window)
 	{
 		m_world->SetGravity(b2Vec2(0.0f, 0.0f));
 
@@ -147,7 +149,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_W:
+		case 22:  // sf::Keyboard::W
 			{
 				b2Vec2 f = m_body->GetWorldVector(b2Vec2(0.0f, -200.0f));
 				b2Vec2 p = m_body->GetWorldPoint(b2Vec2(0.0f, 2.0f));
@@ -155,13 +157,13 @@ public:
 			}
 			break;
 
-		case GLFW_KEY_A:
+		case 0:  // sf::Keyboard::A
 			{
 				m_body->ApplyTorque(50.0f, true);
 			}
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // sf:Keyboard:D
 			{
 				m_body->ApplyTorque(-50.0f, true);
 			}
@@ -169,9 +171,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new ApplyForce;
+		return new ApplyForce(window);
 	}
 
 	b2Body* m_body;

@@ -28,7 +28,7 @@ public:
 		e_count = 30
 	};
 
-	Bridge()
+	Bridge(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -114,9 +114,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Bridge;
+		return new Bridge(window);
 	}
 
 	b2Body* m_middle;

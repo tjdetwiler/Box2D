@@ -116,7 +116,7 @@ public:
 		m_world->CreateJoint(&rjd);
 	}
 
-	TheoJansen()
+	TheoJansen(sf::RenderWindow& window) : Test(window)
 	{
 		m_offset.Set(0.0f, 8.0f);
 		m_motorSpeed = 2.0f;
@@ -222,27 +222,27 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0: // A
 			m_motorJoint->SetMotorSpeed(-m_motorSpeed);
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // S
 			m_motorJoint->SetMotorSpeed(0.0f);
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			m_motorJoint->SetMotorSpeed(m_motorSpeed);
 			break;
 
-		case GLFW_KEY_M:
+		case 12:  // M
 			m_motorJoint->EnableMotor(!m_motorJoint->IsMotorEnabled());
 			break;
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new TheoJansen;
+		return new TheoJansen(window);
 	}
 
 	b2Vec2 m_offset;

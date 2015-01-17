@@ -23,7 +23,7 @@ class Dominos : public Test
 {
 public:
 
-	Dominos()
+	Dominos(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* b1;
 		{
@@ -206,9 +206,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Dominos;
+		return new Dominos(window);
 	}
 };
 

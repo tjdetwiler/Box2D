@@ -29,7 +29,7 @@ public:
 		e_rowCount = 0
 	};
 
-	Confined()
+	Confined(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -106,7 +106,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_C:
+		case 3:  // sf::Keyboard::C
 			CreateCircle();
 			break;
 		}
@@ -158,9 +158,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Confined;
+		return new Confined(window);
 	}
 };
 

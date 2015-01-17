@@ -23,7 +23,7 @@
 class Car : public Test
 {
 public:
-	Car()
+	Car(sf::RenderWindow& window) : Test(window)
 	{		
 		m_hz = 4.0f;
 		m_zeta = 0.7f;
@@ -230,25 +230,25 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  // sf::Keyboard::A
 			m_spring1->SetMotorSpeed(m_speed);
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // sf::Keyboard::S
 			m_spring1->SetMotorSpeed(0.0f);
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // sf::Keyboard::D
 			m_spring1->SetMotorSpeed(-m_speed);
 			break;
 
-		case GLFW_KEY_Q:
+		case 16:  // sf::Keyboard::Q
 			m_hz = b2Max(0.0f, m_hz - 1.0f);
 			m_spring1->SetSpringFrequencyHz(m_hz);
 			m_spring2->SetSpringFrequencyHz(m_hz);
 			break;
 
-		case GLFW_KEY_E:
+		case 4:  //sf::Keyboard::E
 			m_hz += 1.0f;
 			m_spring1->SetSpringFrequencyHz(m_hz);
 			m_spring2->SetSpringFrequencyHz(m_hz);
@@ -263,13 +263,12 @@ public:
 		g_debugDraw.DrawString(5, m_textLine, "frequency = %g hz, damping ratio = %g", m_hz, m_zeta);
 		m_textLine += DRAW_STRING_NEW_LINE;
 
-		g_camera.m_center.x = m_car->GetPosition().x;
+		//g_camera.m_center.x = m_car->GetPosition().x;
 		Test::Step(settings);
 	}
 
-	static Test* Create()
-	{
-		return new Car;
+	static Test* Create(sf::RenderWindow& window)	{
+		return new Car(window);
 	}
 
 	b2Body* m_car;

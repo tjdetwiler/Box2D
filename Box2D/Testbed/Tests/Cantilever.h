@@ -32,7 +32,7 @@ public:
 		e_count = 8
 	};
 
-	Cantilever()
+	Cantilever(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -200,9 +200,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Cantilever;
+		return new Cantilever(window);
 	}
 
 	b2Body* m_middle;

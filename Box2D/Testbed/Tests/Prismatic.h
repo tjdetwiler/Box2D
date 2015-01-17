@@ -23,7 +23,7 @@
 class Prismatic : public Test
 {
 public:
-	Prismatic()
+	Prismatic(sf::RenderWindow& window) : Test (window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -72,15 +72,15 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_L:
+		case 11:  // L
 			m_joint->EnableLimit(!m_joint->IsLimitEnabled());
 			break;
 
-		case GLFW_KEY_M:
+		case 12:  // M
 			m_joint->EnableMotor(!m_joint->IsMotorEnabled());
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // S
 			m_joint->SetMotorSpeed(-m_joint->GetMotorSpeed());
 			break;
 		}
@@ -96,9 +96,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Prismatic;
+		return new Prismatic(window);
 	}
 
 	b2PrismaticJoint* m_joint;

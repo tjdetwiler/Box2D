@@ -24,7 +24,7 @@ class DumpShell : public Test
 {
 public:
 
-	DumpShell()
+	DumpShell(sf::RenderWindow& window) : Test(window)
 	{
 		//Source code dump of Box2D scene: issue304-minimal-case.rube
 		//
@@ -166,9 +166,9 @@ public:
 
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new DumpShell;
+		return new DumpShell(window);
 	}
 };
 

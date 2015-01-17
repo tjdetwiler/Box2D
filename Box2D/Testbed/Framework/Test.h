@@ -19,22 +19,20 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <cstdlib>
+
 #include <Box2D/Box2D.h>
 #include "DebugDraw.h"
 
-#if defined(__APPLE__)
-#include <OpenGL/gl3.h>
-#else
-#include <glew/glew.h>
-#endif
-#include <glfw/glfw3.h>
 
 #include <stdlib.h>
+
+namespace sf {class RenderWindow;}
 
 class Test;
 struct Settings;
 
-typedef Test* TestCreateFcn();
+typedef Test* (*TestCreateFcn)(sf::RenderWindow&);
 
 #define	RAND_LIMIT	32767
 #define DRAW_STRING_NEW_LINE 16
@@ -107,10 +105,10 @@ struct Settings
 struct TestEntry
 {
 	const char *name;
-	TestCreateFcn *createFcn;
+	TestCreateFcn createFcn;
 };
 
-extern TestEntry g_testEntries[];
+extern std::vector<TestEntry> g_testEntries;
 // This is called when a joint in the world is implicitly destroyed
 // because an attached body is destroyed. This gives us a chance to
 // nullify the mouse joint.
@@ -141,7 +139,7 @@ class Test : public b2ContactListener
 {
 public:
 
-	Test();
+	Test(sf::RenderWindow& window);
 	virtual ~Test();
 
 	void DrawTitle(const char *string);
@@ -194,6 +192,9 @@ protected:
 
 	b2Profile m_maxProfile;
 	b2Profile m_totalProfile;
+    sf::RenderWindow* m_window;
+    
+    DebugDraw g_debugDraw;
 };
 
 #endif

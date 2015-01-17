@@ -28,7 +28,7 @@ public:
 		e_count = 10
 	};
 
-	SphereStack()
+	SphereStack(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -75,9 +75,9 @@ public:
 		//printf("\n");
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new SphereStack;
+		return new SphereStack(window);
 	}
 
 	b2Body* m_bodies[e_count];

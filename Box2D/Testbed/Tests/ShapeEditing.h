@@ -23,7 +23,7 @@ class ShapeEditing : public Test
 {
 public:
 
-	ShapeEditing()
+	ShapeEditing(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -52,7 +52,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_C:
+		case 2:  // C
 			if (m_fixture2 == NULL)
 			{
 				b2CircleShape shape;
@@ -63,7 +63,7 @@ public:
 			}
 			break;
 
-		case GLFW_KEY_D:
+		case 3:  // D
 			if (m_fixture2 != NULL)
 			{
 				m_body->DestroyFixture(m_fixture2);
@@ -72,7 +72,7 @@ public:
 			}
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  // S
 			if (m_fixture2 != NULL)
 			{
 				m_sensor = !m_sensor;
@@ -91,9 +91,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new ShapeEditing;
+		return new ShapeEditing(window);
 	}
 
 	b2Body* m_body;

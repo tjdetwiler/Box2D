@@ -22,15 +22,15 @@
 class TimeOfImpact : public Test
 {
 public:
-	TimeOfImpact()
+	TimeOfImpact(sf::RenderWindow& window) : Test(window)
 	{
 		m_shapeA.SetAsBox(25.0f, 5.0f);
 		m_shapeB.SetAsBox(2.5f, 2.5f);
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new TimeOfImpact;
+		return new TimeOfImpact(window);
 	}
 
 	void Step(Settings* settings)

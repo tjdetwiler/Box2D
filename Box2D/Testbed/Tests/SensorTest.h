@@ -29,7 +29,7 @@ public:
 		e_count = 7
 	};
 
-	SensorTest()
+	SensorTest(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -168,9 +168,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new SensorTest;
+		return new SensorTest(window);
 	}
 
 	b2Fixture* m_sensor;

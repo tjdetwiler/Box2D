@@ -28,7 +28,7 @@ public:
 		e_count = 800
 	};
 
-	Tumbler()
+	Tumbler(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -87,9 +87,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Tumbler;
+		return new Tumbler(window);
 	}
 
 	b2RevoluteJoint* m_joint;

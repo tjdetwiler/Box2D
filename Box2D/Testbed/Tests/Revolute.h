@@ -22,7 +22,7 @@
 class Revolute : public Test
 {
 public:
-	Revolute()
+	Revolute(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -128,11 +128,11 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_L:
+		case 11:  // L
 			m_joint->EnableLimit(!m_joint->IsLimitEnabled());
 			break;
 
-		case GLFW_KEY_M:
+		case 12:  // M
 			m_joint->EnableMotor(!m_joint->IsMotorEnabled());
 			break;
 		}
@@ -154,9 +154,9 @@ public:
 		//m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Revolute;
+		return new Revolute(window);
 	}
 
 	b2Body* m_ball;

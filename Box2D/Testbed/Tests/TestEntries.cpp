@@ -71,7 +71,7 @@
 #include "VerticalStack.h"
 #include "Web.h"
 
-TestEntry g_testEntries[] =
+std::vector<TestEntry> g_testEntries =
 {
 	{"Tiles", Tiles::Create},
 	{"Heavy on Light", HeavyOnLight::Create},

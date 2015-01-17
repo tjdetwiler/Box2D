@@ -23,7 +23,7 @@ class ContinuousTest : public Test
 {
 public:
 
-	ContinuousTest()
+	ContinuousTest(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -145,9 +145,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new ContinuousTest;
+		return new ContinuousTest(window);
 	}
 
 	b2Body* m_body;

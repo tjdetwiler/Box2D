@@ -29,7 +29,7 @@ public:
 		e_count = 20
 	};
 
-	Tiles()
+	Tiles(sf::RenderWindow& window) : Test(window)
 	{
 		m_fixtureCount = 0;
 		b2Timer timer;
@@ -144,9 +144,9 @@ public:
 		//}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Tiles;
+		return new Tiles(window);
 	}
 
 	int32 m_fixtureCount;

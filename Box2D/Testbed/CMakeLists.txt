@@ -1,14 +1,13 @@
-# Some flags for Freeglut and GLUI.
-add_definitions( -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS )
 
 # Define the framework files.
 set(Testbed_Framework_SRCS
+	Framework/DebugDraw.cpp
+	Framework/DebugDraw.h
 	Framework/Main.cpp
-	Framework/Render.cpp
-	Framework/Render.h
 	Framework/Test.cpp
 	Framework/Test.h
-)
+	Framework/TestApplication.cpp
+	Framework/TestApplication.h)
 
 #define the test files.
 set(Testbed_Tests_SRCS
@@ -63,30 +62,28 @@ set(Testbed_Tests_SRCS
 source_group(Framework FILES ${Testbed_Framework_SRCS})
 source_group(Tests FILES ${Testbed_Tests_SRCS})
 
-include_directories (
-	${OPENGL_INCLUDE_DIR}
-	${Box2D_SOURCE_DIR}
-)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-if(APPLE)
-	# We are not using the Apple's framework version, but X11's
-	include_directories( /usr/X11/include )
-	link_directories( /usr/X11/lib )
-	set (OPENGL_LIBRARIES GL GLU X11)
-elseif(WIN32)
-	set (ADDITIONAL_LIBRARIES winmm)
-endif(APPLE)
+set (SFML_LIBRARIES
+    sfml-graphics
+    sfml-audio
+    sfml-network
+    sfml-system
+    sfml-window)
+
+include_directories (${Box2D_SOURCE_DIR})
+
+include_directories(Framework 
+                    Tests)
 
 add_executable(Testbed
-	${Testbed_Framework_SRCS}
-	${Testbed_Tests_SRCS}
-)
+              ${Testbed_Framework_SRCS}
+	      ${Testbed_Tests_SRCS})
 
-target_link_libraries (
-	Testbed
-	Box2D
-	glew
-	glfw
-	${ADDITIONAL_LIBRARIES}
-	${OPENGL_LIBRARIES}
-) 
+add_custom_command(TARGET Testbed PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                   ${CMAKE_CURRENT_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Testbed>/assets)
+
+target_link_libraries(Testbed
+                      ${SFML_LIBRARIES}
+	              Box2D) 

@@ -23,7 +23,7 @@
 class Web : public Test
 {
 public:
-	Web()
+	Web(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -150,7 +150,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_B:
+		case 1: // B
 			for (int32 i = 0; i < 4; ++i)
 			{
 				if (m_bodies[i])
@@ -162,7 +162,7 @@ public:
 			}
 			break;
 
-		case GLFW_KEY_J:
+		case 9: // J
 			for (int32 i = 0; i < 8; ++i)
 			{
 				if (m_joints[i])
@@ -197,9 +197,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Web;
+		return new Web(window);
 	}
 
 	b2Body* m_bodies[4];

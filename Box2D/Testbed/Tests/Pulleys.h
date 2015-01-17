@@ -22,7 +22,7 @@
 class Pulleys : public Test
 {
 public:
-	Pulleys()
+	Pulleys(sf::RenderWindow& window) : Test (window)
 	{
 		float32 y = 16.0f;
 		float32 L = 12.0f;
@@ -86,9 +86,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Pulleys;
+		return new Pulleys(window);
 	}
 
 	b2PulleyJoint* m_joint1;

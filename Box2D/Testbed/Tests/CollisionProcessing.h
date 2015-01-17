@@ -26,7 +26,7 @@
 class CollisionProcessing : public Test
 {
 public:
-	CollisionProcessing()
+	CollisionProcessing(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -179,9 +179,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new CollisionProcessing;
+		return new CollisionProcessing(window);
 	}
 };
 

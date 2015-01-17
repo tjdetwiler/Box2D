@@ -25,7 +25,7 @@
 class MotorJoint : public Test
 {
 public:
-	MotorJoint()
+	MotorJoint(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -72,7 +72,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_S:
+		case 18: //sf::Keyboard::S
 			m_go = !m_go;
 			break;
 		}
@@ -101,9 +101,9 @@ public:
 		m_textLine += 15;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new MotorJoint;
+		return new MotorJoint(window);
 	}
 
 	b2MotorJoint* m_joint;

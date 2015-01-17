@@ -24,7 +24,7 @@
 class SliderCrank : public Test
 {
 public:
-	SliderCrank()
+	SliderCrank(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -122,12 +122,12 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_F:
+		case 5:  // F
 			m_joint2->EnableMotor(!m_joint2->IsMotorEnabled());
 			m_joint2->GetBodyB()->SetAwake(true);
 			break;
 
-		case GLFW_KEY_M:
+		case 12: // M
 			m_joint1->EnableMotor(!m_joint1->IsMotorEnabled());
 			m_joint1->GetBodyB()->SetAwake(true);
 			break;
@@ -144,9 +144,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new SliderCrank;
+		return new SliderCrank(window);
 	}
 
 	b2RevoluteJoint* m_joint1;

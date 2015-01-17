@@ -28,7 +28,7 @@ public:
 		e_depth = 4
 	};
 
-	MobileBalanced()
+	MobileBalanced(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground;
 
@@ -96,9 +96,9 @@ public:
 		return body;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new MobileBalanced;
+		return new MobileBalanced(window);
 	}
 };
 

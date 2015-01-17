@@ -27,7 +27,7 @@ public:
 		e_count = 20
 	};
 
-	Pyramid()
+	Pyramid(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -80,9 +80,9 @@ public:
 		//}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Pyramid;
+		return new Pyramid(window);
 	}
 };
 

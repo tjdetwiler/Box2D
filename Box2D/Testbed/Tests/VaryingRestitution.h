@@ -25,7 +25,7 @@ class VaryingRestitution : public Test
 {
 public:
 
-	VaryingRestitution()
+	VaryingRestitution(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -60,9 +60,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new VaryingRestitution;
+		return new VaryingRestitution(window);
 	}
 };
 

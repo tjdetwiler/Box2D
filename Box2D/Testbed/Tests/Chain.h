@@ -22,7 +22,7 @@
 class Chain : public Test
 {
 public:
-	Chain()
+	Chain(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -65,9 +65,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Chain;
+		return new Chain(window);
 	}
 };
 

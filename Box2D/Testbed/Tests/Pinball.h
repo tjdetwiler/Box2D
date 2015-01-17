@@ -24,7 +24,7 @@
 class Pinball : public Test
 {
 public:
-	Pinball()
+	Pinball(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		b2Body* ground = NULL;
@@ -137,7 +137,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0: // A
 			m_button = true;
 			break;
 		}
@@ -147,15 +147,15 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_A:
+		case 0:  // A
 			m_button = false;
 			break;
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Pinball;
+		return new Pinball(window);
 	}
 
 	b2RevoluteJoint* m_leftJoint;

@@ -51,7 +51,7 @@ public:
 		e_maxBodies = 256
 	};
 
-	EdgeShapes()
+	EdgeShapes(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -182,15 +182,15 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_1:
-		case GLFW_KEY_2:
-		case GLFW_KEY_3:
-		case GLFW_KEY_4:
-		case GLFW_KEY_5:
-			Create(key - GLFW_KEY_1);
+		case 27:  // sf::Keyboard::Num1
+		case 28:  // 2
+		case 29:  // 3
+		case 30:  // 4
+		case 31:  // 5
+			Create(key - 27);
 			break;
 
-		case GLFW_KEY_D:
+		case 3: // D
 			DestroyBody();
 			break;
 		}
@@ -233,9 +233,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new EdgeShapes;
+		return new EdgeShapes(window);
 	}
 
 	int32 m_bodyIndex;

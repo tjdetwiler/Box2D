@@ -23,7 +23,7 @@ class HeavyOnLight : public Test
 {
 public:
     
-	HeavyOnLight()
+	HeavyOnLight(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -49,9 +49,9 @@ public:
         body->CreateFixture(&shape, 10.0f);
 	}
     
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new HeavyOnLight;
+		return new HeavyOnLight(window);
 	}
 };
 

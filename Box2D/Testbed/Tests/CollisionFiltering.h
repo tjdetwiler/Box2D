@@ -40,7 +40,7 @@ const uint16 k_circleMask = 0xFFFF;
 class CollisionFiltering : public Test
 {
 public:
-	CollisionFiltering()
+	CollisionFiltering(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -168,9 +168,9 @@ public:
 		body6->CreateFixture(&circleShapeDef);
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new CollisionFiltering;
+		return new CollisionFiltering(window);
 	}
 };
 

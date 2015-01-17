@@ -19,10 +19,12 @@
 #ifndef BODY_TYPES_H
 #define BODY_TYPES_H
 
+#include "Test.h"
+
 class BodyTypes : public Test
 {
 public:
-	BodyTypes()
+	BodyTypes(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -109,15 +111,15 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_D:
+		case 3:  // sf::Keyboard::D
 			m_platform->SetType(b2_dynamicBody);
 			break;
 
-		case GLFW_KEY_S:
+		case 18:  //sf::Keyboard::S
 			m_platform->SetType(b2_staticBody);
 			break;
 
-		case GLFW_KEY_K:
+		case 10:  //sf::Keyboard::K
 			m_platform->SetType(b2_kinematicBody);
 			m_platform->SetLinearVelocity(b2Vec2(-m_speed, 0.0f));
 			m_platform->SetAngularVelocity(0.0f);
@@ -146,9 +148,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new BodyTypes;
+		return new BodyTypes(window);
 	}
 
 	b2Body* m_attachment;

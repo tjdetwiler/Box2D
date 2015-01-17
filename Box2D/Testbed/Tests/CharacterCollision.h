@@ -25,7 +25,7 @@
 class CharacterCollision : public Test
 {
 public:
-	CharacterCollision()
+	CharacterCollision(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -242,9 +242,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new CharacterCollision;
+		return new CharacterCollision(window);
 	}
 
 	b2Body* m_character;

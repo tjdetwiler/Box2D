@@ -23,7 +23,7 @@
 class CompoundShapes : public Test
 {
 public:
-	CompoundShapes()
+	CompoundShapes(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -134,9 +134,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new CompoundShapes;
+		return new CompoundShapes(window);
 	}
 };
 

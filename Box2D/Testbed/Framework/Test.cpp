@@ -16,8 +16,10 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "Test.h"
 #include <stdio.h>
+
+#include "Test.h"
+
 
 void DestructionListener::SayGoodbye(b2Joint* joint)
 {
@@ -31,8 +33,7 @@ void DestructionListener::SayGoodbye(b2Joint* joint)
 	}
 }
 
-Test::Test()
-{
+Test::Test(sf::RenderWindow& window) : g_debugDraw(window) {
 	b2Vec2 gravity;
 	gravity.Set(0.0f, -10.0f);
 	m_world = new b2World(gravity);
@@ -40,6 +41,8 @@ Test::Test()
 	m_textLine = 30;
 	m_mouseJoint = NULL;
 	m_pointCount = 0;
+
+    m_window = &window;
 
 	m_destructionListener.test = this;
 	m_world->SetDestructionListener(&m_destructionListener);
@@ -300,7 +303,7 @@ void Test::Step(Settings* settings)
 	m_world->Step(timeStep, settings->velocityIterations, settings->positionIterations);
 
 	m_world->DrawDebugData();
-    g_debugDraw.Flush();
+    //g_debugDraw.Flush();
 
 	if (timeStep > 0.0f)
 	{
@@ -312,14 +315,14 @@ void Test::Step(Settings* settings)
 		int32 bodyCount = m_world->GetBodyCount();
 		int32 contactCount = m_world->GetContactCount();
 		int32 jointCount = m_world->GetJointCount();
-		g_debugDraw.DrawString(5, m_textLine, "bodies/contacts/joints = %d/%d/%d", bodyCount, contactCount, jointCount);
+//		g_debugDraw.DrawString(5, m_textLine, "bodies/contacts/joints = %d/%d/%d", bodyCount, contactCount, jointCount);
 		m_textLine += DRAW_STRING_NEW_LINE;
 
 		int32 proxyCount = m_world->GetProxyCount();
 		int32 height = m_world->GetTreeHeight();
 		int32 balance = m_world->GetTreeBalance();
 		float32 quality = m_world->GetTreeQuality();
-		g_debugDraw.DrawString(5, m_textLine, "proxies/height/balance/quality = %d/%d/%d/%g", proxyCount, height, balance, quality);
+//		g_debugDraw.DrawString(5, m_textLine, "proxies/height/balance/quality = %d/%d/%d/%g", proxyCount, height, balance, quality);
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 

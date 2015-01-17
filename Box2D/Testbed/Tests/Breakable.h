@@ -29,7 +29,7 @@ public:
 		e_count = 7
 	};
 
-	Breakable()
+	Breakable(sf::RenderWindow& window) : Test(window)
 	{
 		// Ground body
 		{
@@ -135,9 +135,9 @@ public:
 		Test::Step(settings);
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new Breakable;
+		return new Breakable(window);
 	}
 
 	b2Body* m_body1;

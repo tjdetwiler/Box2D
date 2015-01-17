@@ -19,11 +19,12 @@
 #ifndef BULLET_TEST_H
 #define BULLET_TEST_H
 
+
 class BulletTest : public Test
 {
 public:
 
-	BulletTest()
+	BulletTest(sf::RenderWindow& window) : Test(window)
 	{
 		{
 			b2BodyDef bd;
@@ -123,9 +124,9 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new BulletTest;
+		return new BulletTest(window);
 	}
 
 	b2Body* m_body;

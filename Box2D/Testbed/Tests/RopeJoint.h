@@ -30,7 +30,7 @@
 class RopeJoint : public Test
 {
 public:
-	RopeJoint()
+	RopeJoint(sf::RenderWindow& window) : Test(window)
 	{
 		b2Body* ground = NULL;
 		{
@@ -103,7 +103,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_J:
+		case 9: // J
 			if (m_rope)
 			{
 				m_world->DestroyJoint(m_rope);
@@ -133,9 +133,9 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new RopeJoint;
+		return new RopeJoint(window);
 	}
 
 	b2RopeJointDef m_ropeDef;

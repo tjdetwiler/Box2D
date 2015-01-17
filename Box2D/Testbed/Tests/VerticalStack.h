@@ -33,7 +33,7 @@ public:
 		//e_rowCount = 1
 	};
 
-	VerticalStack()
+	VerticalStack(sf::RenderWindow& window) : Test (window)
 	{
 		{
 			b2BodyDef bd;
@@ -88,7 +88,7 @@ public:
 	{
 		switch (key)
 		{
-		case GLFW_KEY_COMMA:
+		case 49:  // sf::Keyboard::Comma
 			if (m_bullet != NULL)
 			{
 				m_world->DestroyBody(m_bullet);
@@ -116,7 +116,7 @@ public:
 			}
 			break;
                 
-        case GLFW_KEY_B:
+        case 1: // B
             g_blockSolve = !g_blockSolve;
             break;
 		}
@@ -158,9 +158,9 @@ public:
 		//}
 	}
 
-	static Test* Create()
+	static Test* Create(sf::RenderWindow& window)
 	{
-		return new VerticalStack;
+		return new VerticalStack(window);
 	}
 
 	b2Body* m_bullet;
