@@ -16,7 +16,7 @@ TestApplication::TestApplication()
     mFont.loadFromFile("./assets/font/arial.ttf");
     std::stringstream  sstr;
     sstr << "Keys: \n"
-         << "Return: switch demo\n"
+         << "Return, quote: switch demo\n"
          << "Arrow Keys: move camera\n"
          << "a,s,d,w,q,l,m: optionally implemented\n";
     mDirections.setFont(mFont);
@@ -59,11 +59,16 @@ void TestApplication::processInput() {
                 case sf::Keyboard::Down:
                     mViewPos.y += 30.0f;
                     break;
+                case sf::Keyboard::Quote:
+                    mTestEntryIndex  = (mTestEntryIndex - 1 < 0) ? g_testEntries.size() - 1 : mTestEntryIndex - 1;
+                    mTest.reset(g_testEntries[mTestEntryIndex].createFcn(mWindow));
+                    mTitle.setString(g_testEntries[mTestEntryIndex].name);
+                    break;
                 case sf::Keyboard::Return:
                     mTestEntryIndex  = (mTestEntryIndex + 1) % g_testEntries.size();
                     mTest.reset(g_testEntries[mTestEntryIndex].createFcn(mWindow));
                     mTitle.setString(g_testEntries[mTestEntryIndex].name);
-        
+                    break;
                 default:
                     mTest->Keyboard(event.key.code);
                     break;

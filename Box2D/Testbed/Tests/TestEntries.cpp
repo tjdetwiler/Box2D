@@ -124,6 +124,5 @@ std::vector<TestEntry> g_testEntries =
 	{"Dynamic Tree", DynamicTreeTest::Create},
 	{"Sensor Test", SensorTest::Create},
 	{"Varying Friction", VaryingFriction::Create},
-	{"Add Pair Stress Test", AddPair::Create},
-	{NULL, NULL}
+	{"Add Pair Stress Test", AddPair::Create}
 };
