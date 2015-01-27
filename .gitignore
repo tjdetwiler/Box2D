@@ -1,0 +1,20 @@
+.idea/
+build/
+*.swp
+*.swo
+
+# Created when using Xcode generator
+.DS_Store
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Box2D/Box2D.xcodeproj/
+Box2D/Box2D/Box2DConfig.cmake
+Box2D/Box2D/Debug/
+Box2D/Testbed/Debug/
+
+Box2D/Box2D/Platformer.build/
+Box2D/HelloWorld/Platformer.build/
+Box2D/Testbed/Platformer.build/
+
